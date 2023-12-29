@@ -1,5 +1,5 @@
 
-import home from './components/home.vue'
+import Home from './components/home.vue'
 import Menu from 'primevue/menu';
 import Accueil from './components/accueil.vue';
 import MenuAdmin from './components/MenuAdmin.vue';
@@ -41,9 +41,9 @@ component: InfoVoiture
     },
     
     {
-        name: 'home',
-        path: '/home',
-        component: home
+        name: 'Home',
+        path: '/Home',
+        component: Home
         },
 {
 name: 'view',
@@ -70,4 +70,9 @@ component: ViewVoiture
             path: "/Indexcomponent",
             component: Indexcomponent,
             },
+            {
+                
+                path: "/",
+                component: Home,
+                },
 ]

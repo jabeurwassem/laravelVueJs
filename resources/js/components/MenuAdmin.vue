@@ -16,7 +16,7 @@
 
             <template #center>
                 <div class="flex flex-wrap align-items-center gap-3" id="listmenu">
-                    <router-link class="nav-link active" to="/home">Home</router-link>
+                    <router-link class="nav-link active" to="/Home">Home</router-link>
                     <router-link class="nav-link active" to="/view">Voitures</router-link>
                     <router-link class="nav-link active" to="/accueil">Clients</router-link>
                     <router-link class="nav-link active" to="/locations">Locations</router-link>

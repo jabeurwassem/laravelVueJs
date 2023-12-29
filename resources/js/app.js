@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/lara-light-green/theme.css'
 import store from "./store" 
+import 'primeicons/primeicons.css';
 
 import App from './App.vue'
 let app = createApp(App)
