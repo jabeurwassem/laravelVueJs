@@ -11,6 +11,8 @@ import Register from './components/authentification/register.vue';
 import InfoVoiture from './components/Voitures/infoVoiture.vue';
 import formulaireReservation from './components/Voitures/formulaireReservation.vue';
 import Indexcomponent from './components/Indexcomponent.vue';
+
+
 export const routes = [
      {
          name: 'accueil',
