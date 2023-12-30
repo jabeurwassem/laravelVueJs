@@ -11,7 +11,7 @@ import Register from './components/authentification/register.vue';
 import InfoVoiture from './components/Voitures/infoVoiture.vue';
 import formulaireReservation from './components/Voitures/formulaireReservation.vue';
 import Indexcomponent from './components/Indexcomponent.vue';
-
+import LOCATIONS from './components/LOC/LOCATIONS.VUE';
 
 export const routes = [
      {
@@ -33,6 +33,11 @@ component: InfoVoiture
     name: 'locations',
     path: '/locations',
     component: Locations,
+  },
+  {
+    name: 'LOCATIONS',
+    path: '/commandes',
+    component: LOCATIONS,
   },
 
   

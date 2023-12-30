@@ -20,6 +20,7 @@
                     <router-link class="nav-link active" to="/view">Voitures</router-link>
                     <router-link class="nav-link active" to="/accueil">Clients</router-link>
                     <router-link class="nav-link active" to="/locations">Locations</router-link>
+                    <router-link class="nav-link active" to="/commandes">commandes</router-link>
                     
                 </div>
             </template>

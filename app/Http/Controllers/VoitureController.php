@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Voiture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VoitureController extends Controller
 {
@@ -47,6 +48,7 @@ class VoitureController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    
     public function update(Request $request, $id)
     {
         $voiture = Voiture::find($id);
@@ -63,6 +65,39 @@ class VoitureController extends Controller
         $voiture->delete();
         return response()->json('Voiture supprimée !');
     }
+    public function getAvailableCars(Request $request)
+{
+    try {
+        // Validez les paramètres de la requête (startDate et endDate)
+        $request->validate([
+            'startDate' => 'required|date',
+            'endDate' => 'required|date|after_or_equal:startDate',
+        ]);
+
+        // Récupérez les voitures disponibles en fonction des dates spécifiées
+        $availableCars = DB::table('voitures')
+            ->where('en_location', false) // Uniquement les voitures qui ne sont pas en location
+            ->whereNotExists(function ($query) use ($request) {
+                $query->select(DB::raw(1))
+                    ->from('locations')
+                    ->where('voitures.id', '=', 'locations.voiture_id')
+                    ->where(function ($query) use ($request) {
+                        $query->where('locations.date_fin', '>=', $request->input('startDate'))
+                            ->where('locations.date_debut', '<=', $request->input('endDate'));
+                    });
+            })
+            ->select('voitures.*')
+            ->get();
+
+        return response()->json($availableCars, 200);
+    } catch (\Exception $e) {
+        // Loggez l'erreur pour le débogage
+    
+
+        // Retournez une réponse avec un statut d'erreur
+        return response()->json(['error' => 'Internal Server Error'], 500);
+    }
+}
 }
 
 

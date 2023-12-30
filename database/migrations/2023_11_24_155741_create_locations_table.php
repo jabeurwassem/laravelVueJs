@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->date('date_debut');
             $table->date('date_fin');
+            $table->boolean('en_location')->default(false); // Ajout de la colonne en_location
+           
             $table->timestamps();
             $table->foreign('voiture_id')->references('id')->on('voitures')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

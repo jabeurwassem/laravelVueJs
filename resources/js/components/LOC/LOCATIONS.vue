@@ -4,7 +4,7 @@
     <br>
     <div class="card">
         <DataTable
-            :value="voitures"
+            :value="locations"
             stripedRows
             paginator
             showGridlines
@@ -12,24 +12,15 @@
             dataKey="id"
             :loading="isLoading"
         >
-            <Column header="Image">
-                <template #body="{ data }">
-                    <img
-                        :src="data.image"
-                        :alt="data.reference"
-                        class="shadow-4"
-                        width="75"
-                    />
-                </template>
-            </Column>
-            <Column field="matricule" header="Matricule"></Column>
+            
+            <Column field="voiture_id" header="voiture_id"></Column>
          
 
-            <Column field="marque" header="Marque" sortable></Column>
-            <Column field="modele" header="Modele" sortable></Column>
+            <Column field="client_id" header="client_id" sortable></Column>
+            <Column field="date_debut" header="date_debut" sortable></Column>
 
-            <Column field="annee" header="Annee" sortable></Column>
-            <Column field="prix_journalier" header="prix_journalier" sortable></Column>
+            <Column field="date_fin" header="date_fin" sortable></Column>
+        
             
             <Column field="id" header="Actions" style="min-width: 12rem">
                 <template #body="val">
@@ -55,10 +46,10 @@ import api from "../config/api.js";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { ref, onMounted } from "vue";
-import AddVoiture from "./AddVoiture.vue";
-import Editvoiture from "./Editvoiture.vue";
+
+
 import axios from 'axios';
-const voitures = ref([]);
+const locations = ref([]);
 const isLoading = ref(true);
 let token=""
 token=localStorage.getItem('token')
@@ -67,9 +58,9 @@ headers: { Authorization: `Bearer ${token}` }
 };
 const getVoitures = async () => {
     await axios
-        .get("http://localhost:8000/api/voitures",config)
+        .get("http://localhost:8000/api/locations",config)
         .then((res) => {
-            voitures.value = res.data;
+            locations.value = res.data;
             isLoading.value = false;
         })
         .catch((error) => {
@@ -97,19 +88,6 @@ const deletearticle = async (id) => {
 </script>
 
 <style lang="scss" scoped></style>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

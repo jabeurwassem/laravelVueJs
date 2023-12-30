@@ -7,7 +7,11 @@ import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/lara-light-green/theme.css'
 import store from "./store" 
 import 'primeicons/primeicons.css';
-
+import "primevue/resources/themes/saga-blue/theme.css";
+   import "primevue/resources/primevue.min.css";
+   import DataView from 'primevue/dataview';
+   import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'     
+  
 import App from './App.vue'
 let app = createApp(App)
 const router = createRouter({
