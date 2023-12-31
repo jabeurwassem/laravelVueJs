@@ -78,7 +78,7 @@ onMounted(() => {
 const deletearticle = async (id) => {
     if (window.confirm("Etes-vous sûr de vouloir supprimer ?")) {
         try {
-            await api.delete(`/api/voitures/${id}`);
+            await api.delete(`/api/locations/${id}`);
             getVoitures();
         } catch (error) {
             console.log(error);
@@ -87,8 +87,7 @@ const deletearticle = async (id) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
 
 
-
-
+</style>

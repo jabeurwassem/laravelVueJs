@@ -21,34 +21,28 @@ class LocationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Validez les données de la requête
-    $request->validate([
-        'voiture_id' => 'required|exists:voitures,id',
-        'client_id' => 'required|exists:clients,id',
-        'date_debut' => 'required|date',
-        'date_fin' => 'required|date|after_or_equal:date_debut',
-    ]);
-
-    // Créez une nouvelle location avec les données validées
-    $location = new Location([
-        'voiture_id' => $request->input('voiture_id'),
-        'client_id' => $request->input('client_id'),
-        'date_debut' => $request->input('date_debut'),
-        'date_fin' => $request->input('date_fin'),
-    ]);
-
-    // Enregistrez la nouvelle location dans la base de données
-    $location->save();
-
-    // Mettez à jour l'état de la voiture pour la marquer comme "en_location"
-    $voiture = Voiture::find($request->input('voiture_id'));
-    $voiture->en_location = true;
-    $voiture->save();
-
-    // Retournez la réponse JSON avec la nouvelle location créée
-    return response()->json($location, 201);
-}
+    {
+        // Validez les données de la requête
+        $request->validate([
+            'voiture_id' => 'required|exists:voitures,id',
+            'client_id' => 'required|exists:clients,id',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+        ]);
+    
+        // Créez une nouvelle location
+        $location = new Location();
+        $location->voiture_id = $request->voiture_id;
+        $location->client_id = $request->client_id;
+        $location->date_debut = $request->date_debut;
+        $location->date_fin = $request->date_fin;
+    
+        // Enregistrez la location dans la base de données
+        $location->save();
+    
+        // Retournez la réponse JSON avec la nouvelle location créée
+        return response()->json($location, 201);
+    }
 
     /**
      * Display the specified resource.

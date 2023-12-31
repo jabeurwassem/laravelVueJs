@@ -41,6 +41,10 @@ Route::middleware('api')->group(function($router) {
     Route::post('/createpayment', [PaymentController::class,
     
     'createPaymentIntent']);
+
+    Route::get('/getAvailableCars',[VoitureController::class,
+    
+    'getAvailableCars']);
     
     });
 
