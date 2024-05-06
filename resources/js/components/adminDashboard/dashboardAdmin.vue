@@ -11,7 +11,7 @@
           <div class="d-flex gap-3" id="listmenu">
             
             <router-link class="nav-link text-light" to="/view">Voitures</router-link>
-            <router-link class="nav-link text-light" to="/accueil">Clients</router-link>
+            <router-link class="nav-link text-light" to="/Home">Visite Site</router-link>
            
             <router-link class="nav-link text-light" to="/commandes">Commandes</router-link>
            
@@ -23,7 +23,9 @@
           <div class="d-flex align-items-center gap-2" @mouseover="showLogoutButton" @mouseleave="hideLogoutButton">
             <span class="admin text-light">JABEUR LOCATION</span>
             <Avatar image="https://us.123rf.com/450wm/wahyufrida/wahyufrida1909/wahyufrida190900363/129861209-ic%C3%B4ne-et-logo-de-la-conception-d-illusration-vectorielle-de-location-de-voiture.jpg" shape="circle" />
-            <button class="logout-button" @click="logout" ref="logoutButton">Logout</button>
+            <button class="nav-link active" @click="logout">
+        <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
           </div>
         </template>
       </Toolbar>
@@ -34,7 +36,10 @@
   import Toolbar from 'primevue/toolbar';
   import Avatar from 'primevue/avatar';
   import AvatarGroup from 'primevue/avatargroup';   
-  
+  import axios from 'axios';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+  let isLoggedIn = false; 
   const showLogoutButton = () => {
     const logoutButton = document.querySelector('.logout-button');
     if (logoutButton) {
@@ -42,17 +47,29 @@
     }
   };
   
-  const hideLogoutButton = () => {
-    const logoutButton = document.querySelector('.logout-button');
-    if (logoutButton) {
-      logoutButton.style.display = 'none';
-    }
-  };
+ 
   
-  const logout = () => {
-    // Your logout logic here
-    console.log('Logout clicked');
-  };
+  const logout = async () => {
+  let token = localStorage.getItem('token');
+  console.log(token);
+
+  axios.post('http://localhost:8000/api/logout', null, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  .then((response) => {
+    console.log(response);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    isLoggedIn = false; // Mettez à jour l'état de connexion après la déconnexion
+    router.push("/login");
+  })
+  .catch(err => {
+    console.log(err);
+    alert(err);
+  });
+};
   </script>
   
   <style lang="scss" scoped>

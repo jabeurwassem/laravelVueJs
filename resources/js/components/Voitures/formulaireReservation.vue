@@ -1,8 +1,16 @@
 <template>
-  <div class="container mt-5">
+  <div class="top-navbar bg-dark text-light text-center py-2">
+      <p class="fas fa-clock">Lundi - Vendredi : de 8h à 17h</p>
+      <p class="fas fa-phone">(+216) 94 260 000 - (+216) 94 120 000</p>
+      <a href="https://www.facebook.com/profile.php?id=61555607077738" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-facebook-f"></i> Visitez notre page Facebook
+      </a>
+    </div>
+  <div class="container mt-5 background-green">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <form @submit.prevent="handleSubmit">
+          
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mb-4">Montant à payer: {{ totalPrice }} TND</h5>
@@ -36,6 +44,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { onMounted, ref } from "vue";
 import { loadStripe } from "@stripe/stripe-js";
@@ -114,7 +123,7 @@ const handleSubmit = async () => {
                        message: "Nouveau Location VOITURE de matricule : "  + store.state.Voiturestore.voiture[0]?.voiture.matricule + "entre" + formatDateString(startDate) + " et " + formatDateString(endDate) + "/t TTC = " + totalPrice.value
                        },'4hD7pQ8L9oZPrzuCd');
                    
-      alert("OK ");
+      alert("Paiement avec succés ");
       store.commit('Voiturestore/clearState');
     } else {
       console.error(response.data.error);
@@ -126,8 +135,6 @@ const clearState = () => {
   store.commit('Voiturestore/clearState');
 };
 </script>
-
- 
 
 <style scoped>
   #card-element {
@@ -158,5 +165,12 @@ const clearState = () => {
   .btn-outline-success {
     color: #28a745;
     border: 1px solid #28a745;
+  }
+
+  /* Nouvelle classe pour l'arrière-plan vert */
+  .background-green {
+    background-color: #28a745;
+    padding: 20px;
+    border-radius: 8px;
   }
 </style>
